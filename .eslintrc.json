@@ -5,6 +5,7 @@
     ],
     "plugins": ["react"],
     "rules": {
+        "comma-dangle": "always-multiline",
         "indent": ["error", 4],
         "object-curly-spacing": "off"
     }

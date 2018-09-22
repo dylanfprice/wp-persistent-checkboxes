@@ -1,1 +1,1 @@
-import './Checkbox'
+import './StrikethroughCheckbox'

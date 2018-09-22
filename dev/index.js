@@ -1,6 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Checkbox from '../src/Checkbox'
+import StrikethroughCheckbox from '../src/StrikethroughCheckbox'
 
-ReactDOM.render(<Checkbox />, document.querySelector('#devApp'))
+ReactDOM.render(
+    <div>
+        <StrikethroughCheckbox id="1" checked={true} label="Test" />
+        <StrikethroughCheckbox id="2" checked={false} label="Test" />
+    </div>,
+    document.querySelector('#devApp')
+)

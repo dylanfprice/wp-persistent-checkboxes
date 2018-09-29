@@ -13,6 +13,7 @@ module.exports = merge(config, {
         open: true,
         openPage: 'dev/'
     },
+    devtool: 'cheap-module-source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]

@@ -6,7 +6,7 @@ import {RichText} from '@wordpress/editor'
 
 const LABEL_SELECTOR = '.components-checkbox-control__label'
 
-registerBlockType('wp-persistent-checkboxes/persistent-checkboxes', {
+registerBlockType('persistent-checkboxes/persistent-checkboxes', {
     title: 'Persistent Checkboxes',
     description: (
         'Block showing a list of checkboxes and labels. When an end user ' +

@@ -10,7 +10,9 @@ const wplib = [
 
 const wplibExternals = wplib.reduce(
     (externals, lib) => {
-        externals[`@wordpress/${lib}`] = ['wp', lib]
+        externals[`@wordpress/${lib}`] = {
+            root: ['wp', lib]
+        }
         return externals
     },
     {}

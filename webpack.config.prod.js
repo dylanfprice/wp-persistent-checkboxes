@@ -1,21 +1,20 @@
 const merge = require('webpack-merge')
 const config = require('./webpack.config')
 
+// Must be kept in sync with wordpress packages in package.json.
 const wplib = [
     'blocks',
     'components',
-    'date',
     'editor',
-    'element',
-    'i18n',
-    'utils',
-    'data',
 ]
 
-const wplibExternals = wplib.reduce((externals, lib) => {
-    externals[`@wordpress/${lib}`] = ['wp', lib]
-    return externals
-})
+const wplibExternals = wplib.reduce(
+    (externals, lib) => {
+        externals[`@wordpress/${lib}`] = ['wp', lib]
+        return externals
+    },
+    {}
+)
 
 module.exports = merge(config, {
     mode: 'production',

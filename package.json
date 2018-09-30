@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "md5": "^2.2.1",
     "prop-types": "^15.6.2"
   },
   "devDependencies": {
@@ -12,6 +13,7 @@
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@wordpress/blocks": "^3.0.0",
     "@wordpress/components": "^3.0.0",
     "@wordpress/editor": "^3.0.0",
     "babel-loader": "^8.0.2",

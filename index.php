@@ -22,4 +22,3 @@ function persistent_checkboxes_register_block() {
     ));
 }
 add_action('init', 'persistent_checkboxes_register_block');
-

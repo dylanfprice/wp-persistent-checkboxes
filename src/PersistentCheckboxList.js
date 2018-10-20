@@ -1,4 +1,3 @@
-import {CheckboxControl} from '@wordpress/components'
 import md5 from 'md5'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -53,7 +52,7 @@ class PersistentCheckbox extends React.Component {
         return 'checkbox-persist:' + window.location.pathname
     }
 
-    onChange (checked) {
+    onChange ({target: {checked}}) {
         if (this.props.persist) {
             setValue(this.getLocalStorageKey(), this.props.id, checked)
         }
@@ -63,12 +62,17 @@ class PersistentCheckbox extends React.Component {
     render () {
         const style = this.state.checked ? {textDecoration: 'line-through'} : {}
         return (
-            <CheckboxControl
-                style={style}
-                label={this.props.label}
-                checked={this.state.checked}
-                onChange={this.onChange}
-            />
+            <div>
+                <input
+                    id={this.props.id}
+                    type="checkbox"
+                    onChange={this.onChange}
+                    checked={this.state.checked}
+                />
+                <label style={style} htmlFor={this.props.id}>
+                    {this.props.label}
+                </label>
+            </div>
         )
     }
 }

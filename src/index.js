@@ -6,8 +6,6 @@ import {RichText} from '@wordpress/editor'
 
 import PersistentCheckboxList from './PersistentCheckboxList'
 
-const LABEL_SELECTOR = '.components-checkbox-control__label'
-
 registerBlockType('persistent-checkboxes/persistent-checkboxes', {
     title: 'Persistent Checkboxes',
     description: (
@@ -18,49 +16,63 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
     category: 'widgets',
     attributes: {
         labels: {
-            type: 'array',
-            source: 'children',
-            selector: LABEL_SELECTOR,
+            source: 'query',
+            selector: 'label',
+            query: {label: {source: 'text'}}
         },
     },
-    edit: ({className, attributes: {labels = ['Edit me!']}, setAttributes}) => {
-        const checkboxes = <PersistentCheckboxList labels={labels} persist={false} />
+    edit: ({attributes: {labels = [{label: 'Edit me!'}, {label: 'ok'}]}, className, setAttributes}) => {
+        console.log('edit', labels)
+        const actualLabels = labels.map(label => label['label'])
+        const checkboxList = <PersistentCheckboxList labels={actualLabels} persist={false} />
         return (
             <div className={className}>
                 <RichText
-                    value={checkboxes}
-                    onChange={checkboxes =>
-                        setAttributes({labels: checkboxes.map(extractLabel)})
-                    }
+                    value={checkboxList}
+                    onChange={([newCheckboxList]) => {
+                        console.log('setAttributes', extractLabels(newCheckboxList))
+                        setAttributes({labels: extractLabels(newCheckboxList)})
+                    }}
                 />
             </div>
         )
     },
     save: (props) => {
-        const {attributes: {labels}} = props
-        const blockId = hashLabels(labels)
-        const checkboxes = <PersistentCheckboxList labels={labels} />
-        return (
-            <div id={blockId} className={props.className}>
+        console.log('save', props)
+        const {attributes: {labels = []}, className} = props
+        console.log('save', labels)
+        const actualLabels = labels.map(label => label['label'])
+        const blockId = generateBlockId(actualLabels)
+        const checkboxes = <PersistentCheckboxList labels={actualLabels} />
+        const value = (
+            <div id={blockId} className={className}>
                 {checkboxes}
                 <script>
                     window.wp.persistentCheckboxes.render({JSON.stringify(props.attributes)})
                 </script>
             </div>
         )
+        console.log('save', value)
+        return value
     },
 })
 
-function extractLabel (checkboxControl) {
-    return checkboxControl['props']['children'][0]['props']['children'][1]['props']['children'][0]
+function extractLabels (checkboxList) {
+    const checkboxes = checkboxList['props']['children']
+    return checkboxes.map(checkbox => {
+        const elements = checkbox['props']['children']
+        const label = elements[1]
+        const {props: {children: [innerText]}} = label
+        return {label: innerText}
+    })
 }
 
-function hashLabels (labels) {
-    return md5(labels.join('\n'))
+function generateBlockId (labels) {
+    return `wp-persistent-checkboxes-${md5(labels.join('\n'))}`
 }
 
 export function render (props) {
     const checkboxes = React.createElement(PersistentCheckboxList, props)
-    const blockId = hashLabels(props.attributes.labels)
+    const blockId = generateBlockId(props.labels)
     ReactDOM.render(checkboxes, document.getElementById(blockId))
 }

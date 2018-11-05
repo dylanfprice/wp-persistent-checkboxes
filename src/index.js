@@ -22,16 +22,30 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         },
     },
     edit: ({attributes: {labels = [{label: 'Edit me!'}, {label: 'ok'}]}, className, setAttributes}) => {
-        const labelStrings = labels.map(label => label['label'])
-        const checkboxList = <PersistentCheckboxList labels={labelStrings} persist={false} />
+        setAttributes({labels})
+        const checkboxes = (
+            <PersistentCheckboxList
+                labels={getLabelStrings(labels)}
+                persist={false}
+            />
+        )
+        console.log('edit', labels, checkboxes)
+        const newCheckbox = () => {
+            // TODO: get new checkbox to show up right away
+            labels.push({label: 'Edit me!'})
+            console.log('newCheckbox', labels)
+            setAttributes({labels})
+        }
         return (
             <div className={className}>
                 <RichText
-                    value={checkboxList}
-                    onChange={([newCheckboxList]) => {
-                        setAttributes({labels: extractLabels(newCheckboxList)})
+                    value={checkboxes}
+                    onChange={([newCheckboxes]) => {
+                        setAttributes({labels: extractLabels(newCheckboxes)})
                     }}
                 />
+                <input id='new-checkbox' type='checkbox' disabled={true} onClick={newCheckbox} ></input>
+                <label htmlFor='new-checkbox' onClick={newCheckbox} style={{color: 'rgba(51,51,51,.5)'}}>{'Add...'}</label>
             </div>
         )
     },
@@ -39,7 +53,7 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         const {attributes: {labels = []}, className} = props
         const blockId = generateBlockId(labels)
         const checkboxes = (
-            <PersistentCheckboxList labels={getLabelStrings(props.labels)} />
+            <PersistentCheckboxList labels={getLabelStrings(labels)} />
         )
         const value = (
             <div id={blockId} className={className}>
@@ -54,6 +68,8 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
 })
 
 function extractLabels (checkboxList) {
+    // TODO: deal with delete case
+    console.log('extractLabels', checkboxList)
     const checkboxes = checkboxList['props']['children']
     return checkboxes.map(checkbox => {
         const elements = checkbox['props']['children']

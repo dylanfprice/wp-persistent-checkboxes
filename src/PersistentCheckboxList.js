@@ -33,7 +33,7 @@ PersistentCheckboxList.propTypes = {
     persist: PropTypes.bool,
 }
 
-PersistentCheckboxList.defaults = {
+PersistentCheckboxList.defaultProps = {
     persist: true,
 }
 
@@ -83,6 +83,6 @@ PersistentCheckbox.propTypes = {
     persist: PropTypes.bool,
 }
 
-PersistentCheckbox.defaults = {
+PersistentCheckbox.defaultProps = {
     persist: true,
 }

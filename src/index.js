@@ -22,15 +22,13 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         },
     },
     edit: ({attributes: {labels = [{label: 'Edit me!'}, {label: 'ok'}]}, className, setAttributes}) => {
-        console.log('edit', labels)
-        const actualLabels = labels.map(label => label['label'])
-        const checkboxList = <PersistentCheckboxList labels={actualLabels} persist={false} />
+        const labelStrings = labels.map(label => label['label'])
+        const checkboxList = <PersistentCheckboxList labels={labelStrings} persist={false} />
         return (
             <div className={className}>
                 <RichText
                     value={checkboxList}
                     onChange={([newCheckboxList]) => {
-                        console.log('setAttributes', extractLabels(newCheckboxList))
                         setAttributes({labels: extractLabels(newCheckboxList)})
                     }}
                 />
@@ -38,12 +36,11 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         )
     },
     save: (props) => {
-        console.log('save', props)
         const {attributes: {labels = []}, className} = props
-        console.log('save', labels)
-        const actualLabels = labels.map(label => label['label'])
-        const blockId = generateBlockId(actualLabels)
-        const checkboxes = <PersistentCheckboxList labels={actualLabels} />
+        const blockId = generateBlockId(labels)
+        const checkboxes = (
+            <PersistentCheckboxList labels={getLabelStrings(props.labels)} />
+        )
         const value = (
             <div id={blockId} className={className}>
                 {checkboxes}
@@ -52,7 +49,6 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
                 </script>
             </div>
         )
-        console.log('save', value)
         return value
     },
 })
@@ -67,12 +63,19 @@ function extractLabels (checkboxList) {
     })
 }
 
+function getLabelStrings (labels) {
+    return labels.map(label => label['label'])
+}
+
 function generateBlockId (labels) {
-    return `wp-persistent-checkboxes-${md5(labels.join('\n'))}`
+    const labelStrings = getLabelStrings(labels)
+    return `wp-persistent-checkboxes-${md5(labelStrings.join('\n'))}`
 }
 
 export function render (props) {
-    const checkboxes = React.createElement(PersistentCheckboxList, props)
+    const checkboxes = (
+        <PersistentCheckboxList labels={getLabelStrings(props.labels)} />
+    )
     const blockId = generateBlockId(props.labels)
     ReactDOM.render(checkboxes, document.getElementById(blockId))
 }

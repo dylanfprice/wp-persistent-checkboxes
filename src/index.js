@@ -18,12 +18,11 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         content: {type: 'string'},
     },
     edit: ({attributes: {content}, className, setAttributes}) => {
-        const style = 'p:before {content: "\u2610 "}'
+        const style = '.wp-block-persistent-checkboxes-persistent-checkboxes p:before {content: "\u2610 "}'
         return (
-            <div>
+            <div className={className}>
                 <style>{style}</style>
                 <RichText
-                    className={className}
                     multiline='p'
                     value={content}
                     onChange={content => setAttributes({content})}
@@ -35,10 +34,13 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         const {attributes: {content}, className} = props
 
         const doc = new window.DOMParser().parseFromString(content, 'text/html')
-        const labels = (
+        let labels = (
             Array.from(doc.getElementsByTagName('p'))
                 .map(p => p.innerHTML)
         )
+        if (labels[labels.length - 1] === '') {
+            labels = labels.slice(0, -1)
+        }
 
         const blockId = generateBlockId(labels)
         const labelContents = labels.map((value, index) => (

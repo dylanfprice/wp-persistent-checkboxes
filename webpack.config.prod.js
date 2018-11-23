@@ -6,6 +6,7 @@ const wplib = [
     'blocks',
     'components',
     'editor',
+    'element',
 ]
 
 const wplibExternals = wplib.reduce(

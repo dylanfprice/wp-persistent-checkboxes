@@ -14,7 +14,7 @@ function persistent_checkboxes_register_block() {
         'persistent-checkboxes-script',
         plugins_url('dist/main.js', __FILE__ ),
         // Must be kept in sync with wordpress packages in package.json.
-        array('wp-blocks', 'wp-components', 'wp-editor')
+        array('wp-blocks', 'wp-components', 'wp-editor', 'wp-element')
     );
 
     register_block_type('persistent-checkboxes/persistent-checkboxes', array(

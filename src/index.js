@@ -14,7 +14,6 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
     ),
     icon: 'yes',
     category: 'widgets',
-    align: false,
     attributes: {
         content: {type: 'string'},
     },

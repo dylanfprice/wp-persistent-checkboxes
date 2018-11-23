@@ -11,7 +11,7 @@ const wplib = [
 const wplibExternals = wplib.reduce(
     (externals, lib) => {
         externals[`@wordpress/${lib}`] = {
-            root: ['wp', lib]
+            window: ['wp', lib]
         }
         return externals
     },
@@ -21,7 +21,7 @@ const wplibExternals = wplib.reduce(
 module.exports = merge(config, {
     mode: 'production',
     output: {
-        library: ['wp', '[name]'],
+        library: ['wp', 'persistentCheckboxes'],
         libraryTarget: 'window',
     },
     externals: {

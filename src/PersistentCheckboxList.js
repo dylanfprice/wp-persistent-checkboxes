@@ -7,10 +7,13 @@ import {getValue, setValue} from './localStorage'
 export default class PersistentCheckboxList extends React.Component {
     render () {
         const {labels} = this.props
-        const listId = `list-${md5(labels.join('\n'))}`
+        const labelStrings = labels.map(JSON.stringify)
+        const listHash = md5(labelStrings.join('\n'))
+        const listId = `list-${listHash}`
 
-        const checkboxes = labels.map(label => {
-            const id = `${listId}-checkbox-${md5(label)}`
+        const checkboxes = labels.map((label, index) => {
+            const labelHash = md5(labelStrings[index])
+            const id = `${listId}-checkbox-${labelHash}`
             return (
                 <PersistentCheckbox
                     key={id}
@@ -29,7 +32,7 @@ export default class PersistentCheckboxList extends React.Component {
 }
 
 PersistentCheckboxList.propTypes = {
-    labels: PropTypes.array.isRequired,
+    labels: PropTypes.arrayOf(PropTypes.node).isRequired,
     persist: PropTypes.bool,
 }
 
@@ -79,7 +82,7 @@ class PersistentCheckbox extends React.Component {
 
 PersistentCheckbox.propTypes = {
     id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     persist: PropTypes.bool,
 }
 

@@ -18,13 +18,17 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         content: {type: 'string'},
     },
     edit: ({attributes: {content}, className, setAttributes}) => {
+        const style = 'p:before {content: "\u2610 "}'
         return (
-            <RichText
-                className={className}
-                multiline='p'
-                value={content}
-                onChange={content => setAttributes({content})}
-            />
+            <div>
+                <style>{style}</style>
+                <RichText
+                    className={className}
+                    multiline='p'
+                    value={content}
+                    onChange={content => setAttributes({content})}
+                />
+            </div>
         )
     },
     save: (props) => {

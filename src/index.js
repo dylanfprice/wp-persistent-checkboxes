@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import {registerBlockType} from '@wordpress/blocks'
 import {RichText} from '@wordpress/editor'
+import {renderToString} from '@wordpress/element'
 
 import PersistentCheckboxList from './PersistentCheckboxList'
 
@@ -15,83 +16,86 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
     icon: 'yes',
     category: 'widgets',
     attributes: {
-        labels: {
-            source: 'query',
-            selector: 'label',
-            query: {label: {source: 'text'}}
-        },
+        labels: {type: 'array'},
     },
-    edit: ({attributes: {labels = [{label: 'Edit me!'}, {label: 'ok'}]}, className, setAttributes}) => {
-        setAttributes({labels})
-        const checkboxes = (
-            <PersistentCheckboxList
-                labels={getLabelStrings(labels)}
-                persist={false}
-            />
+    edit: ({attributes: {labels = [[]]}, className, setAttributes}) => {
+        const value = (
+            <ul style={{listStyleType: 'square'}}>
+                {labels.map((label, index) => <li key={index}>{label}</li>)}
+            </ul>
         )
-        console.log('edit', labels, checkboxes)
-        const newCheckbox = () => {
-            // TODO: get new checkbox to show up right away
-            labels.push({label: 'Edit me!'})
-            console.log('newCheckbox', labels)
-            setAttributes({labels})
-        }
         return (
-            <div className={className}>
-                <RichText
-                    value={checkboxes}
-                    onChange={([newCheckboxes]) => {
-                        setAttributes({labels: extractLabels(newCheckboxes)})
-                    }}
-                />
-                <input id='new-checkbox' type='checkbox' disabled={true} onClick={newCheckbox} ></input>
-                <label htmlFor='new-checkbox' onClick={newCheckbox} style={{color: 'rgba(51,51,51,.5)'}}>{'Add...'}</label>
-            </div>
+            <RichText
+                className={className}
+                multiline='li'
+                value={value}
+                onChange={content => {
+                    const labels = (
+                        findObjects(content, 'type', 'li')
+                            .map(li => li.props.children)
+                    )
+                    setAttributes({labels})
+                }}
+            />
         )
     },
     save: (props) => {
         const {attributes: {labels = []}, className} = props
         const blockId = generateBlockId(labels)
-        const checkboxes = (
-            <PersistentCheckboxList labels={getLabelStrings(labels)} />
-        )
-        const value = (
+        const labelContents = labels.map((value, index) => (
+            <RichText.Content key={index} tagName='span' value={value} />
+        ))
+        const checkboxes = <PersistentCheckboxList labels={labelContents} />
+        const renderProps = {labels, blockId}
+        return (
             <div id={blockId} className={className}>
                 {checkboxes}
                 <script>
-                    window.wp.persistentCheckboxes.render({JSON.stringify(props.attributes)})
+                    window.wp.persistentCheckboxes.render({JSON.stringify(renderProps)})
                 </script>
             </div>
         )
-        return value
     },
 })
 
-function extractLabels (checkboxList) {
-    // TODO: deal with delete case
-    console.log('extractLabels', checkboxList)
-    const checkboxes = checkboxList['props']['children']
-    return checkboxes.map(checkbox => {
-        const elements = checkbox['props']['children']
-        const label = elements[1]
-        const {props: {children: [innerText]}} = label
-        return {label: innerText}
-    })
-}
+function findObjects (obj, targetProp, targetValue) {
+    let results = []
 
-function getLabelStrings (labels) {
-    return labels.map(label => label['label'])
+    function _findObjects (theObject) {
+        if (theObject instanceof Array) {
+            theObject.forEach(_findObjects)
+        } else {
+            for (let prop in theObject) {
+                if (theObject.hasOwnProperty(prop)) {
+                    let value = theObject[prop]
+                    if (prop === targetProp && value === targetValue) {
+                        results.push(theObject)
+                    }
+                    if (value instanceof Object || value instanceof Array) {
+                        _findObjects(value)
+                    }
+                }
+            }
+        }
+    }
+
+    _findObjects(obj)
+
+    return results
 }
 
 function generateBlockId (labels) {
-    const labelStrings = getLabelStrings(labels)
-    return `wp-persistent-checkboxes-${md5(labelStrings.join('\n'))}`
+    return `wp-persistent-checkboxes-${md5(labels.join('\n'))}`
 }
 
 export function render (props) {
-    const checkboxes = (
-        <PersistentCheckboxList labels={getLabelStrings(props.labels)} />
-    )
-    const blockId = generateBlockId(props.labels)
+    const {labels, blockId} = props
+    const labelContents = labels.map((value, index) => (
+        <span
+            key={index}
+            dangerouslySetInnerHTML={{__html: renderToString(value)}}
+        ></span>
+    ))
+    const checkboxes = <PersistentCheckboxList labels={labelContents} />
     ReactDOM.render(checkboxes, document.getElementById(blockId))
 }

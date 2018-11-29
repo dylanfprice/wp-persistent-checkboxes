@@ -18,7 +18,7 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         content: {type: 'string'},
     },
     edit: ({attributes: {content}, className, setAttributes}) => {
-        const style = '.wp-block-persistent-checkboxes-persistent-checkboxes p:before {content: "\u2610 "}'
+        const style = `.${className} p:before {content: "\u2610 "}`
         return (
             <div className={className}>
                 <style>{style}</style>

@@ -48,12 +48,15 @@ registerBlockType('persistent-checkboxes/persistent-checkboxes', {
         ))
         const checkboxes = <PersistentCheckboxList labels={labelContents} />
         const renderProps = {labels, blockId}
+        const script = (
+            `window.addEventListener('load', function(event) {
+                window.wp.persistentCheckboxes.render(${JSON.stringify(renderProps)})
+            });`
+        )
         return (
             <div id={blockId} className={className}>
                 {checkboxes}
-                <script>
-                    window.wp.persistentCheckboxes.render({JSON.stringify(renderProps)})
-                </script>
+                <script>{script}</script>
             </div>
         )
     },

@@ -16,3 +16,12 @@ describe( 'parseLabels', () => {
 		expect( actual ).toEqual( [ 'Foo', 'Bar' ] );
 	} );
 } );
+
+describe( 'getBlockId', () => {
+	it( 'returns block id for given labels', () => {
+		const actual = module.getBlockId( [ 'label one', 'label two' ] );
+		expect( actual ).toBe(
+			'wp-persistent-checkboxes-119de1efd33e2dc42f523f34eecee903'
+		);
+	} );
+} );

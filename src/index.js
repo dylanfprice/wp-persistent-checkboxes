@@ -15,17 +15,11 @@ registerBlockType( 'persistent-checkboxes/persistent-checkboxes', {
 	icon: 'yes',
 	category: 'widgets',
 	attributes: {
-		content: {
-			type: 'string',
-			source: 'html',
-			multiline: 'span',
-			selector: 'label',
-		},
 		labelObjects: {
 			type: 'array',
 			source: 'query',
 			default: [],
-			selector: 'ul',
+			selector: 'ol li',
 			query: {
 				label: {
 					type: 'string',
@@ -39,9 +33,6 @@ registerBlockType( 'persistent-checkboxes/persistent-checkboxes', {
 		const content = (
 			labelObjects.map( ( { label } ) => `<p>${ label }</p>` ).join()
 		);
-		console.log( 'edit' );
-		console.log( labelObjects );
-		console.log( content );
 		const style = `
       .${ className } p:before {content: "\u2610 ";}
       .${ className } p {margin-bottom: 0 !important;}
@@ -62,11 +53,16 @@ registerBlockType( 'persistent-checkboxes/persistent-checkboxes', {
 		);
 	},
 	save: ( { attributes: { labelObjects }, className } ) => {
+		const labels = labelObjects.map( ( { label } ) => label );
+		const script = (
+			`window.addEventListener('load', function(event) {
+         persistentCheckboxes.render(${ JSON.stringify( { labels } ) })
+       });`
+		);
 		return (
-			<div className={ className }>
-				<PersistentCheckboxList
-					labels={ labelObjects.map( ( { label } ) => label ) }
-				/>
+			<div id={ getBlockId( labels ) } className={ className }>
+				<PersistentCheckboxList labels={ labels } />
+				<script dangerouslySetInnerHTML={ { __html: script } }></script>
 			</div>
 		);
 	},
@@ -84,16 +80,20 @@ export function parseLabels( content ) {
 	return labels;
 }
 
+export function getBlockId( labels ) {
+	return `wp-persistent-checkboxes-${ md5( labels.join() ) }`;
+}
+
 export function PersistentCheckboxList( { labels } ) {
-	console.log( 'PersistentCheckboxList' );
-	console.log( labels );
 	const listId = `list-${ md5( labels.join() ) }`;
 	const style = { listStyleType: 'none', marginLeft: 0 };
 	return (
 		<ol id={ listId } style={ style }>
 			{ labels.map( ( label ) => {
 				const id = `${ listId }-checkbox-${ md5( label ) }`;
-				const labelElement = <RichText.Content tagName="span" value={ label } />;
+				const labelElement = (
+					<span dangerouslySetInnerHTML={ { __html: label } }></span>
+				);
 				return (
 					<li>
 						<PersistentCheckbox id={ id } label={ labelElement } />
@@ -101,5 +101,12 @@ export function PersistentCheckboxList( { labels } ) {
 				);
 			} ) }
 		</ol>
+	);
+}
+
+export function render( { labels } ) {
+	ReactDOM.render(
+		<PersistentCheckboxList labels={ labels } />,
+		document.getElementById( getBlockId( labels ) )
 	);
 }

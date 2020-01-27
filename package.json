@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "6.2.0",
-    "rewire": "^4.0.1"
+    "webpack-merge": "^4.2.2"
   },
   "scripts": {
     "start": "wp-scripts start",

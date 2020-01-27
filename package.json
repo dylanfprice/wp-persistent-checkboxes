@@ -1,50 +1,35 @@
 {
   "name": "wp-persistent-checkboxes",
-  "version": "0.0.1",
-  "description": "Wordpress block for checkboxes that persist their state in localStorage",
-  "main": "src/index.js",
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "md5": "^2.2.1",
-    "prop-types": "^15.6.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.1",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@wordpress/blocks": "^6.0.2",
-    "@wordpress/components": "^7.0.2",
-    "@wordpress/editor": "^9.0.2",
-    "@wordpress/element": "^2.1.8",
-    "babel-loader": "^8.0.2",
-    "eslint": "^5.6.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "webpack": "^4.19.0",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8",
-    "webpack-merge": "^4.1.4"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.prod.js --progress"
-  },
+  "version": "1.0.0",
+  "description": "Wordpress block for checkboxes that persist their state in localStorage.",
+  "author": "Dylan Price",
+  "email": "the.dylan.price@gmail.com",
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://bitbucket.org/dylanfprice/wp-persistent-checkboxes#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dylanfprice/wp-persistent-checkboxes.git"
+    "url": "git+ssh://git@bitbucket.org/dylanfprice/wp-persistent-checkboxes.git"
   },
-  "author": "Dylan Price",
-  "license": "GPL-2.0",
-  "bugs": {
-    "url": "https://github.com/dylanfprice/wp-persistent-checkboxes/issues"
+  "main": "build/index.js",
+  "dependencies": {
+    "@wordpress/block-editor": "^3.5.0",
+    "@wordpress/blocks": "^6.10.0",
+    "md5": "^2.2.1"
   },
-  "homepage": "https://github.com/dylanfprice/wp-persistent-checkboxes#readme"
+  "devDependencies": {
+    "@wordpress/scripts": "6.2.0",
+    "rewire": "^4.0.1"
+  },
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
+    "lint": "wp-scripts lint-js && wp-scripts lint-style",
+    "test": "wp-scripts test-unit-js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:@wordpress/eslint-plugin/recommended"
+    ]
+  }
 }

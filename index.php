@@ -3,18 +3,21 @@
  * Plugin Name: Persistent Checkboxes
  * Plugin URI: https://bitbucket.org/dylanfprice/wp-persistent-checkboxes
  * Description: This plugin contains a gutenberg block that renders checkboxes whose state will be persisted in the end user's browser.
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Dylan Price <the.dylan.price@gmail.com>
  *
  * @package persistent-checkboxes
  */
 
 function persistent_checkboxes_register_block() {
+
+    $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
+ 
     wp_register_script(
         'persistent-checkboxes-script',
-        plugins_url('dist/main.js', __FILE__ ),
-        // Must be kept in sync with wordpress packages in package.json.
-        array('wp-blocks', 'wp-components', 'wp-editor', 'wp-element')
+        plugins_url('build/index.js', __FILE__ ),
+        $asset_file['dependencies'],
+        $asset_file['version']
     );
 
     register_block_type('persistent-checkboxes/persistent-checkboxes', array(

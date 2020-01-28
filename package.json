@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "6.2.0",
+    "enzyme": "^3.11.0",
     "webpack-merge": "^4.2.2"
   },
   "scripts": {

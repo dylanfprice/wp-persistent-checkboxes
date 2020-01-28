@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { getValue, setValue } from './localStorage';
-import PersistentCheckbox from './PersistentCheckbox.js';
+import PersistentCheckbox from './PersistentCheckbox';
 
 jest.mock( './localStorage' );
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import { getValue, setValue } from './localStorage';
 
 export default class PersistentCheckbox extends React.Component {
@@ -11,7 +12,7 @@ export default class PersistentCheckbox extends React.Component {
 	}
 
 	getLocalStorageKey() {
-		return 'checkbox-persist:' + window.location.pathname;
+		return 'PersistentCheckbox:' + window.location.pathname;
 	}
 
 	onChange( { target: { checked } } ) {

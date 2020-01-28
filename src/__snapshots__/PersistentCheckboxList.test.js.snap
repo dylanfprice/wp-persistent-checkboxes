@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersistentCheckboxList renders a list of checkboxes 1`] = `
+<ol
+  style={
+    Object {
+      "listStyleType": "none",
+      "marginLeft": 0,
+    }
+  }
+>
+  <li
+    key="list-331dfe0af8808b841db0c5ecf449572d-checkbox-65371417ffa624d6d9f3de3649ace43c"
+  >
+    <PersistentCheckbox
+      id="list-331dfe0af8808b841db0c5ecf449572d-checkbox-65371417ffa624d6d9f3de3649ace43c"
+      label={
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "label one",
+            }
+          }
+        />
+      }
+    />
+  </li>
+  <li
+    key="list-331dfe0af8808b841db0c5ecf449572d-checkbox-0e3c7175dad08d16072b98f692de3ae1"
+  >
+    <PersistentCheckbox
+      id="list-331dfe0af8808b841db0c5ecf449572d-checkbox-0e3c7175dad08d16072b98f692de3ae1"
+      label={
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "label two",
+            }
+          }
+        />
+      }
+    />
+  </li>
+  <li
+    key="list-331dfe0af8808b841db0c5ecf449572d-checkbox-eaafb0110b5c654b06ea4344a8a95b2b"
+  >
+    <PersistentCheckbox
+      id="list-331dfe0af8808b841db0c5ecf449572d-checkbox-eaafb0110b5c654b06ea4344a8a95b2b"
+      label={
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "label three",
+            }
+          }
+        />
+      }
+    />
+  </li>
+</ol>
+`;

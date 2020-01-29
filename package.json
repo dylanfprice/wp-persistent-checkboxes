@@ -26,7 +26,8 @@
     "start": "wp-scripts start",
     "build": "wp-scripts build",
     "lint": "wp-scripts lint-js && wp-scripts lint-style",
-    "test": "wp-scripts test-unit-js"
+    "test": "wp-scripts test-unit-js",
+    "test:debug": "node inspect node_modules/.bin/jest --runInBand"
   },
   "eslintConfig": {
     "extends": [

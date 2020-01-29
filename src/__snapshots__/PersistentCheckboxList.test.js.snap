@@ -10,10 +10,10 @@ exports[`PersistentCheckboxList renders a list of checkboxes 1`] = `
   }
 >
   <li
-    key="list-331dfe0af8808b841db0c5ecf449572d-checkbox-65371417ffa624d6d9f3de3649ace43c"
+    key="list-f71ed41bc0cd46acf4084643477bdd31-checkbox-65371417ffa624d6d9f3de3649ace43c"
   >
     <PersistentCheckbox
-      id="list-331dfe0af8808b841db0c5ecf449572d-checkbox-65371417ffa624d6d9f3de3649ace43c"
+      id="list-f71ed41bc0cd46acf4084643477bdd31-checkbox-65371417ffa624d6d9f3de3649ace43c"
       label={
         <span
           dangerouslySetInnerHTML={
@@ -26,10 +26,10 @@ exports[`PersistentCheckboxList renders a list of checkboxes 1`] = `
     />
   </li>
   <li
-    key="list-331dfe0af8808b841db0c5ecf449572d-checkbox-0e3c7175dad08d16072b98f692de3ae1"
+    key="list-f71ed41bc0cd46acf4084643477bdd31-checkbox-0e3c7175dad08d16072b98f692de3ae1"
   >
     <PersistentCheckbox
-      id="list-331dfe0af8808b841db0c5ecf449572d-checkbox-0e3c7175dad08d16072b98f692de3ae1"
+      id="list-f71ed41bc0cd46acf4084643477bdd31-checkbox-0e3c7175dad08d16072b98f692de3ae1"
       label={
         <span
           dangerouslySetInnerHTML={
@@ -42,10 +42,10 @@ exports[`PersistentCheckboxList renders a list of checkboxes 1`] = `
     />
   </li>
   <li
-    key="list-331dfe0af8808b841db0c5ecf449572d-checkbox-eaafb0110b5c654b06ea4344a8a95b2b"
+    key="list-f71ed41bc0cd46acf4084643477bdd31-checkbox-eaafb0110b5c654b06ea4344a8a95b2b"
   >
     <PersistentCheckbox
-      id="list-331dfe0af8808b841db0c5ecf449572d-checkbox-eaafb0110b5c654b06ea4344a8a95b2b"
+      id="list-f71ed41bc0cd46acf4084643477bdd31-checkbox-eaafb0110b5c654b06ea4344a8a95b2b"
       label={
         <span
           dangerouslySetInnerHTML={

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`save renders the checkboxes and inline script 1`] = `
+<div
+  className="test"
+  id="wp-persistent-checkboxes-f71ed41bc0cd46acf4084643477bdd31"
+>
+  <PersistentCheckboxList
+    labels={
+      Array [
+        "label one",
+        "label two",
+        "label three",
+      ]
+    }
+  />
+  <script
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "window.addEventListener('load', function(event) {
+       persistentCheckboxes.render({\\"labels\\":[\\"label one\\",\\"label two\\",\\"label three\\"]})
+     });",
+      }
+    }
+  />
+</div>
+`;

@@ -12,7 +12,7 @@ export default class PersistentCheckbox extends React.Component {
 	}
 
 	getLocalStorageKey() {
-		return 'PersistentCheckbox:' + window.location.pathname;
+		return 'PersistentCheckbox:' + document.location.pathname;
 	}
 
 	onChange( { target: { checked } } ) {

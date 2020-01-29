@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit renders the RichText editor 1`] = `
+<div
+  className="test"
+>
+  <style>
+    
+      .test p:before {content: "☐ ";}
+      .test p {margin-bottom: 0 !important;}
+    
+  </style>
+  <WithInstanceId(WithBlockEditContext(WithSelect(WithDispatch(RichTextWrapper))))
+    multiline="p"
+    onChange={[Function]}
+    value="<p>label one</p><p>label two</p><p>label three</p>"
+  />
+</div>
+`;

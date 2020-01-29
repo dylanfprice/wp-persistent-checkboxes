@@ -1,14 +1,12 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 
 import PersistentCheckboxList from './PersistentCheckboxList';
 
 describe( 'PersistentCheckboxList', () => {
 	it( 'renders a list of checkboxes', () => {
 		const labels = [ 'label one', 'label two', 'label three' ];
-		const checkboxes = shallow(
-			<PersistentCheckboxList labels={ labels } />
-		);
-		expect( checkboxes ).toMatchSnapshot();
+		const checkboxes = <PersistentCheckboxList labels={ labels } />;
+		expect( shallow( checkboxes ) ).toMatchSnapshot();
 	} );
 } );

@@ -1,6 +1,6 @@
 {
   "name": "wp-persistent-checkboxes",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Wordpress block for checkboxes that persist their state in localStorage.",
   "author": "Dylan Price",
   "email": "the.dylan.price@gmail.com",

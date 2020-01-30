@@ -1,0 +1,9 @@
+pipelines:
+  default:
+    - step:
+        name: build
+        image: node:lts
+        script:
+          - ./build.sh
+        artifacts:
+          - build/wp-persistent-checkboxes.zip

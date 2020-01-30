@@ -8,8 +8,9 @@ pipelines:
         script:
           - apt-get update && apt-get install zip
           - ./build.sh
-        artifacts:
-          - build/wp-persistent-checkboxes.zip
+          - curl -X POST \
+              "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" \
+              --form files=@"build/wp-persistent-checkboxes.zip"
 definitions:
   caches:
     apt: /var/cache/apt/archives

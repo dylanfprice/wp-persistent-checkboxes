@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from '@wordpress/element';
 
 import { getValue, setValue } from './localStorage';
 
-export default class PersistentCheckbox extends React.Component {
+export default class PersistentCheckbox extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = (

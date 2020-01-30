@@ -1,5 +1,5 @@
+import { render as reactDOMRender } from '@wordpress/element';
 import md5 from 'md5';
-import ReactDOM from 'react-dom';
 
 import PersistentCheckboxList from './PersistentCheckboxList';
 
@@ -23,7 +23,7 @@ export function getBlockId( labels ) {
 }
 
 export function render( { labels } ) {
-	ReactDOM.render(
+	reactDOMRender(
 		<PersistentCheckboxList labels={ labels } />,
 		document.getElementById( getBlockId( labels ) )
 	);

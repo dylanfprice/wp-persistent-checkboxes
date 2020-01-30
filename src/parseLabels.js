@@ -1,5 +1,5 @@
 export default function parseLabels( content ) {
-	const doc = new DOMParser().parseFromString( content, 'text/html' );
+	const doc = new window.DOMParser().parseFromString( content, 'text/html' );
 	let labels = (
 		Array.from( doc.getElementsByTagName( 'p' ) )
 			.map( ( p ) => p.innerHTML )

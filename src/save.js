@@ -1,7 +1,6 @@
 import md5 from 'md5';
 import ReactDOM from 'react-dom';
 
-import parseLabels from './parseLabels';
 import PersistentCheckboxList from './PersistentCheckboxList';
 
 export default function save( { attributes: { labelObjects }, className } ) {

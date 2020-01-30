@@ -1,10 +1,9 @@
 import { shallow } from 'enzyme';
-import { RawHTML } from '@wordpress/element';
 
 import * as module from './deprecated';
 
-describe( 'v0_0_1', () => {
-	const v0_0_1 = module.v0_0_1;
+describe( 'V0_0_1', () => {
+	const V0_0_1 = module.V0_0_1;
 	describe( 'save', () => {
 		it( 'returns undefined if original content has <ol>', () => {
 			const originalContent = `
@@ -15,7 +14,7 @@ describe( 'v0_0_1', () => {
           <ol><li>test</li></ol>
         </div>
       `;
-			const actual = v0_0_1.save( {
+			const actual = V0_0_1.save( {
 				attributes: { originalContent },
 			} );
 			expect( actual ).toBeUndefined();
@@ -29,7 +28,7 @@ describe( 'v0_0_1', () => {
           <ol id="test"><li>test</li></ol>
         </div>
       `;
-			const actual = v0_0_1.save( {
+			const actual = V0_0_1.save( {
 				attributes: { originalContent },
 			} );
 			expect( actual ).toBeUndefined();
@@ -43,7 +42,7 @@ describe( 'v0_0_1', () => {
 				'<div>test</div>',
 				'</div>',
 			].join( '' );
-			const actual = shallow( v0_0_1.save( { attributes: { originalContent } } ) );
+			const actual = shallow( V0_0_1.save( { attributes: { originalContent } } ) );
 			const expected = shallow(
 				<div id="test"
 					className="wp-block-persistent-checkboxes-persistent-checkboxes"
@@ -57,7 +56,7 @@ describe( 'v0_0_1', () => {
 	describe( 'migrate', () => {
 		it( 'transforms content into label objects', () => {
 			const content = '<p>label one</p><p>label two</p><p>label three</p>';
-			const actual = v0_0_1.migrate( { content } );
+			const actual = V0_0_1.migrate( { content } );
 			const expected = {
 				labelObjects: [
 					{ label: 'label one' },

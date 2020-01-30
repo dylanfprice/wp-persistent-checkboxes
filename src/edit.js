@@ -16,8 +16,8 @@ export default function	edit( { attributes: { labelObjects }, className, setAttr
 			<RichText
 				multiline="p"
 				value={ content }
-				onChange={ ( content ) => setAttributes( {
-					labelObjects: parseLabels( content ).map( ( label ) => {
+				onChange={ ( newContent ) => setAttributes( {
+					labelObjects: parseLabels( newContent ).map( ( label ) => {
 						return { label };
 					} ),
 				} ) }

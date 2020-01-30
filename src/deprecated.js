@@ -1,8 +1,6 @@
-import { RawHTML } from '@wordpress/element';
-
 import parseLabels from './parseLabels';
 
-export const v0_0_1 = {
+export const V0_0_1 = {
 	attributes: {
 		content: { type: 'string' },
 		originalContent: {
@@ -12,7 +10,7 @@ export const v0_0_1 = {
 	},
 	save: ( { attributes: { originalContent } } ) => {
 		const className = 'wp-block-persistent-checkboxes-persistent-checkboxes';
-		const doc = new DOMParser().parseFromString( originalContent, 'text/html' );
+		const doc = new window.DOMParser().parseFromString( originalContent, 'text/html' );
 		const element = doc.querySelector( `.${ className }` );
 		const isOldFormat = element.querySelector( 'ol' ) === null;
 		if ( isOldFormat ) {
@@ -34,5 +32,5 @@ export const v0_0_1 = {
 	},
 };
 
-const deprecated = [ v0_0_1 ];
+const deprecated = [ V0_0_1 ];
 export default deprecated;

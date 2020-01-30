@@ -3,7 +3,7 @@
  * Plugin Name: Persistent Checkboxes
  * Plugin URI: https://bitbucket.org/dylanfprice/wp-persistent-checkboxes
  * Description: This plugin contains a gutenberg block that renders checkboxes whose state will be persisted in the end user's browser.
- * Version: 1.0.0
+ * Version: 0.1.0
  * Author: Dylan Price <the.dylan.price@gmail.com>
  *
  * @package persistent-checkboxes

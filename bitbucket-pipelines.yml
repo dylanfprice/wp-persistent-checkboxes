@@ -1,8 +1,8 @@
+image: node:lts
 pipelines:
   default:
     - step:
         name: build
-        image: node:lts
         script:
           - ./build.sh
         artifacts:

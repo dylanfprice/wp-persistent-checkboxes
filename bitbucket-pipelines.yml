@@ -14,9 +14,9 @@ pipelines:
         name: release
         trigger: manual
         script:
-          - curl -X POST \
-              "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" \
-              --form files=@"build/wp-persistent-checkboxes.zip"
+          - curl -X POST --form files=@"build/wp-persistent-checkboxes.zip"
+              "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads"
+              
 definitions:
   caches:
     apt: /var/cache/apt/archives

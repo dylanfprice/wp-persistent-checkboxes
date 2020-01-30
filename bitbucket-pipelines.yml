@@ -10,3 +10,6 @@ pipelines:
           - ./build.sh
         artifacts:
           - build/wp-persistent-checkboxes.zip
+definitions:
+  caches:
+    apt: /var/cache/apt/archives

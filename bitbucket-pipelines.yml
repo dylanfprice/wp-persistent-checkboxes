@@ -3,7 +3,10 @@ pipelines:
   default:
     - step:
         name: build
+        caches:
+          - apt
         script:
+          - apt-get install zip
           - ./build.sh
         artifacts:
           - build/wp-persistent-checkboxes.zip

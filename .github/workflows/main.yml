@@ -1,0 +1,30 @@
+name: Build Plugin
+on: [push]
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1.1.0
+      with:
+        version: lts
+    - uses: actions/cache@v1.1.2
+      with:
+        path: /var/cache/apt/archives
+        key: apt
+    - run: apt-get update && apt-get install zip
+    - run: ./build.sh
+    - uses: actions/upload-artifact@v1.0.0
+      with:
+        name: plugin
+        path: build/wp-persistent-checkboxes.zip
+  release:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/download-artifact@v1.0.0
+        with:
+          name: plugin
+          path: wp-persistent-checkboxes.zip
+      - uses: yakuhzi/action-release@v1.2.0
+        with:
+          file: wp-persistent-checkboxes.zip

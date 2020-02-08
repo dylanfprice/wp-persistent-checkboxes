@@ -1,4 +1,5 @@
 import { registerBlockType } from '@wordpress/blocks';
+import { __ } from '@wordpress/i18n';
 
 import edit from './edit';
 import save from './save';
@@ -9,10 +10,11 @@ export { render } from './save';
 registerBlockType(
 	'persistent-checkboxes/persistent-checkboxes',
 	{
-		title: 'Persistent Checkboxes',
-		description: (
+		title: __( 'Persistent Checkboxes', 'persistent-checkboxes' ),
+		description: __(
 			'Block showing a list of checkboxes and labels. When an end user ' +
-      'checks a box it is remembered across refreshes in their browser.'
+      'checks a box it is remembered across refreshes in their browser.',
+			'persistent-checkboxes',
 		),
 		icon: 'yes',
 		category: 'widgets',

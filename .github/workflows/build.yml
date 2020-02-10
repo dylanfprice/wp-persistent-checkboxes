@@ -14,19 +14,28 @@ jobs:
         name: plugin
         path: build/wp-persistent-checkboxes.zip
   release:
+    if: startsWith(github.ref, 'v')
     needs: build
     runs-on: [ubuntu-latest]
     steps:
-      - id: get_tag
-        uses: olegtarasov/get-tag@v1
-      - if: steps.get_tag.outputs.tag != ''
-        uses: actions/download-artifact@v1.0.0
+      - uses: actions/download-artifact@v1.0.0
         with:
           name: plugin
-          path: wp-persistent-checkboxes.zip
-      - if: steps.get_tag.outputs.tag != ''
-        uses: yakuhzi/action-release@v1.2.0
-        with:
-          file: wp-persistent-checkboxes.zip
+          path: ./wp-persistent-checkboxes.zip
+      - id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./wp-persistent-checkboxes.zip
+          asset_name: wp-persistent-checkboxes.zip
+          asset_content_type: application/zip

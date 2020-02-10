@@ -14,7 +14,7 @@ jobs:
         name: plugin
         path: build/wp-persistent-checkboxes.zip
   release:
-    if: startsWith(github.ref, 'v')
+    if: startsWith(github.ref, 'refs/tags/')
     needs: build
     runs-on: [ubuntu-latest]
     steps:

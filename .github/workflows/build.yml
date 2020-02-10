@@ -24,6 +24,7 @@ jobs:
         with:
           name: plugin
           path: wp-persistent-checkboxes.zip
-      - uses: yakuhzi/action-release@v1.2.0
+      - if: steps.get_tag.outputs.tag != ''
+        uses: yakuhzi/action-release@v1.2.0
         with:
           file: wp-persistent-checkboxes.zip

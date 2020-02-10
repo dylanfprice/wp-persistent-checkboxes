@@ -19,9 +19,7 @@ jobs:
     steps:
       - id: get_tag
         uses: olegtarasov/get-tag@v1
-      - if: success()
-        run: echo ${{ steps.get_tag.outputs.tag }}
-      - if: success()
+      - if: steps.get_tag.outputs.tag != ''
         uses: actions/download-artifact@v1.0.0
         with:
           name: plugin

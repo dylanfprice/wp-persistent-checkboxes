@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: olegtarasov/get-tag@v1
       - if: success()
+        run: echo $GITHUB_TAG_NAME
+      - if: success()
         uses: actions/download-artifact@v1.0.0
         with:
           name: plugin

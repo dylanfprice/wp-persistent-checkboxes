@@ -4,7 +4,7 @@
   "description": "Wordpress block for checkboxes that persist their state in localStorage.",
   "author": "Dylan Price",
   "email": "the.dylan.price@gmail.com",
-  "license": "GPL-2.0-or-later",
+  "license": "UNLICENSED",
   "private": true,
   "keywords": [],
   "homepage": "https://bitbucket.org/dylanfprice/wp-persistent-checkboxes#readme",
@@ -28,7 +28,7 @@
   "scripts": {
     "start": "wp-scripts start",
     "build": "wp-scripts build",
-    "lint": "wp-scripts lint-pkg-json && wp-scripts lint-js && wp-scripts lint-style",
+    "lint": "wp-scripts lint-js && wp-scripts lint-style",
     "test": "wp-scripts test-unit-js",
     "test:debug": "node inspect node_modules/.bin/jest --runInBand"
   },

@@ -23,7 +23,7 @@ jobs:
           name: plugin
           path: .
       - id: changelog_reader
-        uses: mindsers/changelog-reader-action@v1
+        uses: mindsers/changelog-reader-action@v1.0.1
         with:
           version: ${{ github.ref }}
       - id: create_release

@@ -25,7 +25,7 @@ function persistent_checkboxes_register_block() {
     if ( function_exists( 'register_block_type' ) ) {
         register_block_type(
             'persistent-checkboxes/persistent-checkboxes',
-            array('script' => 'persistent-checkboxes-script' ),
+            array( 'script' => 'persistent-checkboxes-script' )
         );
     }
 }

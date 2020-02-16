@@ -12,8 +12,8 @@ registerBlockType(
 	{
 		title: __( 'Persistent Checkboxes', 'persistent-checkboxes' ),
 		description: __(
-			'Block showing a list of checkboxes and labels. When an end user ' +
-      'checks a box it is remembered across refreshes in their browser.',
+			'Create a list of checkboxes. When a user checks a box the item is ' +
+      'crossed off. Which items are crossed off is remembered on their device.',
 			'persistent-checkboxes',
 		),
 		icon: 'yes',

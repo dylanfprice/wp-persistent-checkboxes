@@ -1,0 +1,1 @@
+gutenberg,block,checkbox,recipe,howto,how to,how-to

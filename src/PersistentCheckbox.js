@@ -2,6 +2,13 @@ import { Component } from '@wordpress/element';
 
 import { getValue, setValue } from './localStorage';
 
+/**
+ * Renders a checkbox that persists its checked state in localStorage.
+ * 
+ * Props:
+ *   id (string): The unique ID of the checkbox. Used as the localStorage key.
+ *   label (React.Element): The label to display next to the checkbox.
+ */
 export default class PersistentCheckbox extends Component {
 	constructor( props ) {
 		super( props );
